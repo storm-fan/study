@@ -1,0 +1,1275 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://www.cnblogs.com/eniac12/p/5329396.html#s12 -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>常用排序算法总结(一) - SteveWang - 博客园</title>
+<link type="text/css" rel="stylesheet" href="./常用排序算法总结(一) - SteveWang - 博客园_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./常用排序算法总结(一) - SteveWang - 博客园_files/bundle-KJC.css">
+<link type="text/css" rel="stylesheet" href="./常用排序算法总结(一) - SteveWang - 博客园_files/221334.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./常用排序算法总结(一) - SteveWang - 博客园_files/bundle-KJC-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/eniac12/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/eniac12/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/eniac12/wlwmanifest.xml">
+<script async="" src="./常用排序算法总结(一) - SteveWang - 博客园_files/analytics.js.下载"></script><script type="text/javascript" src="./常用排序算法总结(一) - SteveWang - 博客园_files/encoder.js.下载"></script><script src="./常用排序算法总结(一) - SteveWang - 博客园_files/jquery-2.2.0.min.js.下载"></script>
+<script type="text/javascript">var currentBlogApp = 'eniac12', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="./常用排序算法总结(一) - SteveWang - 博客园_files/blog-common.js.下载" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<table class="Framework" cellspacing="0" cellpadding="0" width="100%">
+	<tbody><tr>
+		<td colspan="3">
+			
+<div id="top">
+<table cellpadding="10" cellspacing="0">
+	<tbody><tr>
+		<td nowrap="">
+			<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/eniac12/">逝者如斯,不舍昼夜</a></h1>
+			尘世中一个迷途小书童，读书太少，想得太多
+		</td>
+	</tr>
+</tbody></table>
+</div>
+<div id="sub">
+	<div id="sub-right"><div id="blog_stats">
+<div class="BlogStats">posts - 72, comments - 41, trackbacks - 0, articles - 0</div></div></div>
+	
+&nbsp;
+<a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a>&nbsp;:: 
+<a id="blog_nav_myhome" href="http://www.cnblogs.com/eniac12/">首页</a>&nbsp;::
+<a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a>&nbsp;::
+<a id="blog_nav_contact" accesskey="9" rel="nofollow" href="https://msg.cnblogs.com/send/SteveWang">联系</a>&nbsp;::
+<a id="blog_nav_rss" href="http://www.cnblogs.com/eniac12/rss">订阅</a>
+<a id="blog_nav_rss_image" class="XMLLink" href="http://www.cnblogs.com/eniac12/rss"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/xml.gif" alt="订阅"></a>&nbsp;::
+<a id="blog_nav_admin" rel="nofollow" href="https://i.cnblogs.com/">管理</a>
+
+</div>
+		</td>
+	</tr>
+	<tr>
+		<td class="LeftCell">
+			<div id="leftmenu">
+            	
+		            <div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/05/01&#39;);return false;">&lt;</a></td><td align="center">2018年6月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2018/07/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">27</td><td class="CalOtherMonthDay" align="center">28</td><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td class="CalWeekendDay" align="center">2</td></tr><tr><td class="CalWeekendDay" align="center">3</td><td align="center">4</td><td align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td class="CalWeekendDay" align="center">9</td></tr><tr><td class="CalWeekendDay" align="center">10</td><td align="center">11</td><td align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center">15</td><td class="CalWeekendDay" align="center">16</td></tr><tr><td class="CalWeekendDay" align="center">17</td><td align="center">18</td><td align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td class="CalWeekendDay" align="center">23</td></tr><tr><td class="CalWeekendDay" align="center">24</td><td align="center">25</td><td align="center">26</td><td align="center">27</td><td align="center">28</td><td align="center">29</td><td class="CalTodayDay" align="center">30</td></tr><tr><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+		            
+<div id="cell">
+<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2"><h3>公告</h3>
+<div id="news">
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/eniac12/">SteveWang</a><br>园龄：<a href="https://home.cnblogs.com/u/eniac12/" title="入园时间：2015-04-02">3年2个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/eniac12/followers/">111</a><br>关注：<a href="https://home.cnblogs.com/u/eniac12/followees/">5</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;2ea8bbf9-11d9-e411-b908-9dcfd8948a71&#39;)">+加关注</a></div><script>getFollowStatus('2ea8bbf9-11d9-e411-b908-9dcfd8948a71')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+</div>
+
+	            
+	            <div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="cell">
+<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2">
+<h3 class="catListTitle">搜索</h3>
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div></div><div id="sidebar_categories">
+		<div id="cell">
+		<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2"><h3>随笔分类</h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/eniac12/category/779703.html">Android(10)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/eniac12/category/674559.html">C#(10)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/eniac12/category/722238.html">C/C++(9)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/eniac12/category/745571.html">Java(4)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/eniac12/category/678370.html">Linux(2)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_0_Link_5" href="https://www.cnblogs.com/eniac12/category/674230.html">matlab(4)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_0_Link_6" href="https://www.cnblogs.com/eniac12/category/810320.html">数据结构(11)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_0_Link_7" href="https://www.cnblogs.com/eniac12/category/723328.html">算法(22)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_0_Link_8" href="https://www.cnblogs.com/eniac12/category/674330.html">杂(2)</a>
+				</li>
+			
+				</ul>
+			</div>
+	
+		<div id="cell">
+		<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2"><h3>随笔档案</h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/eniac12/archive/2016/11.html">2016年11月 (1)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_1" href="https://www.cnblogs.com/eniac12/archive/2016/10.html">2016年10月 (1)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_2" href="https://www.cnblogs.com/eniac12/archive/2016/08.html">2016年8月 (1)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_3" href="https://www.cnblogs.com/eniac12/archive/2016/06.html">2016年6月 (8)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_4" href="https://www.cnblogs.com/eniac12/archive/2016/05.html">2016年5月 (3)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_5" href="https://www.cnblogs.com/eniac12/archive/2016/04.html">2016年4月 (2)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/eniac12/archive/2016/03.html">2016年3月 (8)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_7" href="https://www.cnblogs.com/eniac12/archive/2016/01.html">2016年1月 (2)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_8" href="https://www.cnblogs.com/eniac12/archive/2015/10.html">2015年10月 (7)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_9" href="https://www.cnblogs.com/eniac12/archive/2015/09.html">2015年9月 (6)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_10" href="https://www.cnblogs.com/eniac12/archive/2015/08.html">2015年8月 (17)</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_1_Link_11" href="https://www.cnblogs.com/eniac12/archive/2015/04.html">2015年4月 (16)</a>
+				</li>
+			
+				</ul>
+			</div>
+	
+		<div id="cell">
+		<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2"><h3>关于我</h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_2_Link_0" href="http://www.jianshu.com/users/98b3a4208109/latest_articles" rel="nofollow">简书</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_2_Link_1" href="http://blog.sina.com.cn/eniac12" rel="nofollow">新浪博客</a>
+				</li>
+			
+				<li><a id="CatList_LinkList_2_Link_2" href="http://weibo.com/2745953452/profile?rightmod=1&amp;wvr=6&amp;mod=personinfo" rel="nofollow">新浪微博</a>
+				</li>
+			
+				</ul>
+			</div>
+	</div><div id="recent_comments_wrap">
+    <div id="cell">
+        <img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2">
+        <h3>最新评论</h3>
+        <div class="RecentComment">
+            <div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#4002322">1. Re:常用排序算法总结(一)</a></li>
+        <li class="recent_comment_body">谢谢博主，很受用</li>
+        <li class="recent_comment_author">--看日升日落</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#3999571">2. Re:常用排序算法总结(一)</a></li>
+        <li class="recent_comment_body">请问你的动态图是怎么制作的？</li>
+        <li class="recent_comment_author">--jowu</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#3997357">3. Re:常用排序算法总结(一)</a></li>
+        <li class="recent_comment_body">优秀优秀，学习了，感谢大神！</li>
+        <li class="recent_comment_author">--CatPaw_NO_1</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#3972917">4. Re:常用排序算法总结(一)</a></li>
+        <li class="recent_comment_body">优秀   感谢博主！非常有用了</li>
+        <li class="recent_comment_author">--江小医</li>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#3967125">5. Re:常用排序算法总结(一)</a></li>
+        <li class="recent_comment_body">归并排序在回溯的时候频繁开辟内存空间，且没有对申请的空间做释放处理；<br>最好在MergeSortRecursion（）函数外申请临时内存空间，用完后释放处理。</li>
+        <li class="recent_comment_author">--jhjs</li>
+</ul>
+</div>
+        </div>
+    </div>
+</div>
+<div id="topview_posts_wrap">
+    <div id="cell">
+        <img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2">
+        <h3>阅读排行榜</h3>
+        <div class="RecentComment">
+            <div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/eniac12/p/5329396.html">1. 常用排序算法总结(一)(177056)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/4398310.html">2. C#文本文件(.txt)读写(36755)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/4393978.html">3. C#中的数组(32246)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/4461614.html">4. C#获取相对路径(17985)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/5143160.html">5. 你了解System.out.println()的真正含义吗？(12676)</a></li></ul></div>
+        </div>
+    </div>
+</div><div id="topfeedback_posts_wrap">
+    <div id="cell">
+        <img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2">
+        <h3>评论排行榜</h3>
+        <div class="RecentComment">
+            <div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/eniac12/p/5329396.html">1. 常用排序算法总结(一)(23)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/4390845.html">2. C#与MATLAB混合编程(5)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/4422968.html">3. （四）文本编辑器Vim/Vi(3)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/5240100.html">4. 为什么匿名内部类只能访问其所在方法中的final类型的局部变量？(3)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/5332117.html">5. 常用排序算法总结(二)(3)</a></li></ul></div>
+        </div>
+    </div>    
+</div>
+<div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div id="cell">
+<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon-group.jpg" hspace="5" align="left" vspace="2"><h3>推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/eniac12/p/5329396.html">1. 常用排序算法总结(一)(51)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/4390845.html">2. C#与MATLAB混合编程(3)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/4422968.html">3. （四）文本编辑器Vim/Vi(3)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/4398310.html">4. C#文本文件(.txt)读写(2)</a></li><li><a href="https://www.cnblogs.com/eniac12/p/5240100.html">5. 为什么匿名内部类只能访问其所在方法中的final类型的局部变量？(2)</a></li></ul></div>
+</div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+		</td>
+		<td class="MainCell">
+			<div id="main">
+				
+<div id="post_detail">
+	<div class="post">
+		<div class="posthead">
+			<h2>
+				<a id="cb_post_title_url" class="singleposttitle" href="https://www.cnblogs.com/eniac12/p/5329396.html">常用排序算法总结(一)</a>
+			</h2>
+ 			Posted on <span id="post-date">2016-03-28 22:13</span> <a href="http://www.cnblogs.com/eniac12/">SteveWang</a> 阅读(<span id="post_view_count">177056</span>) 评论(<span id="post_comment_count">23</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5329396" rel="nofollow">编辑</a> <a href="http://www.cnblogs.com/eniac12/p/5329396.html#" onclick="AddToWz(5329396);return false;">收藏</a>
+			<script type="text/javascript">var allowComments=true,cb_blogId=221334,cb_entryId=5329396,cb_blogApp=currentBlogApp,cb_blogUserGuid='2ea8bbf9-11d9-e411-b908-9dcfd8948a71',cb_entryCreatedDate='2016/3/28 22:13:00';loadViewCount(cb_entryId);var cb_postType=1;</script>
+			
+		</div>
+		<div class="postbody"><div id="cnblogs_post_body" class="blogpost-body"><h3><span style="line-height: 1.5;">　　目录</span></h3>
+<ul>
+<li><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s1">冒泡排序</a>　　</span>
+<ul>
+<li><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s12">鸡尾酒排序</a>　　</span></li>
+</ul>
+</li>
+<li><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s2"><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;">选择排序</span></a></li>
+<li><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s3"><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;">插入排序</span></a>
+<ul>
+<li><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s31">二分插入排序</a>　　</span></li>
+<li><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s32">希尔排序</a>　　</span></li>
+</ul>
+</li>
+<li><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s4"><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;">归并排序</span></a></li>
+<li><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s5"><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;">堆排序</span></a></li>
+<li><a href="http://www.cnblogs.com/eniac12/p/5329396.html#s6"><span style="line-height: 1.5; font-family: 宋体; font-size: 15px;">快速排序</span></a></li>
+</ul>
+<p>&nbsp;</p>
+<p><span style="line-height: 1.5;">　　我们通常所说的排序算法往往指的是<strong>内部排序算法</strong>，即数据记录在内存中进行排序。</span></p>
+<p><span style="line-height: 1.5;">　　</span>排序算法大体可分为两种：</p>
+<p>　　　　一种是<strong>比较排序</strong>，时间复杂度O(nlogn) ~ O(n^2)，主要有：<strong style="line-height: 1.5;">冒泡排序</strong><span style="line-height: 1.5;">，</span><strong style="line-height: 1.5;">选择排序</strong><span style="line-height: 1.5;">，</span><strong style="line-height: 1.5;">插入排序</strong><span style="line-height: 1.5;">，</span><strong style="line-height: 1.5;">归并排序</strong><span style="line-height: 1.5;">，</span><strong style="line-height: 1.5;">堆排序</strong><span style="line-height: 1.5;">，</span><strong style="line-height: 1.5;">快速排序</strong><span style="line-height: 1.5;">等。</span></p>
+<p>　　　　另一种是<strong>非比较排序</strong>，时间复杂度可以达到O(n)，主要有：<strong>计数排序</strong>，<strong>基数排序</strong>，<strong>桶排序</strong>等。</p>
+<p>　　这里我们来探讨一下常用的比较排序算法，非比较排序算法将在<a href="http://www.cnblogs.com/eniac12/p/5332117.html" target="_blank">下一篇文章</a>中介绍。下表给出了常见比较排序算法的性能：</p>
+<p>　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160503202729044-614991035.jpg" alt=""></p>
+<p>&nbsp;</p>
+<p>　　有一点我们很容易忽略的是<strong>排序算法的稳定性</strong>(腾讯校招2016笔试题曾考过)。</p>
+<p>　　排序算法稳定性的简单形式化定义为：<strong>如果A<sub>i</sub> = A<sub>j</sub>，排序前A<sub>i</sub>在A<sub>j</sub>之前，排序后A<sub>i</sub>还在A<sub>j</sub>之前，则称这种排序算法是稳定的。</strong>通俗地讲就是保证排序前后两个相等的数的相对顺序不变。</p>
+<p>　　对于不稳定的排序算法，只要举出一个实例，即可说明它的不稳定性；而对于稳定的排序算法，必须对算法进行分析从而得到稳定的特性。需要注意的是，排序算法是否为稳定的是由具体算法决定的，不稳定的算法在某种条件下可以变为稳定的算法，而稳定的算法在某种条件下也可以变为不稳定的算法。</p>
+<p>　　例如，对于冒泡排序，原本是稳定的排序算法，如果将记录交换的条件改成A[i] &gt;= A[i + 1]，则两个相等的记录就会交换位置，从而变成不稳定的排序算法。</p>
+<p>　　其次，说一下排序算法稳定性的好处。<strong>排序算法如果是稳定的，那么从一个键上排序，然后再从另一个键上排序，前一个键排序的结果可以为后一个键排序所用。</strong>基数排序就是这样，先按低位排序，逐次按高位排序，低位排序后元素的顺序在高位也相同时是不会改变的。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>　　<a name="s1"></a>冒泡排序(Bubble Sort)</h2>
+<p>&nbsp;</p>
+<p>　　冒泡排序是一种极其简单的排序算法，也是我所学的第一个排序算法。它重复地走访过要排序的元素，依次比较相邻两个元素，如果他们的顺序错误就把他们调换过来，直到没有元素再需要交换，排序完成。这个算法的名字由来是因为越小(或越大)的元素会经由交换慢慢“浮”到数列的顶端。</p>
+<p>　　冒泡排序算法的运作如下：</p>
+<ol>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">比较相邻的元素，如果前一个比后一个大，就把它们两个调换位置。</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">对每一对相邻元素作同样的工作，从开始第一对到结尾的最后一对。这步做完后，最后的元素会是最大的数。</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">针对所有的元素重复以上的步骤，除了最后一个。</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</span></li>
+</ol>
+<p>　　由于它的简洁，冒泡排序通常被用来对于程序设计入门的学生介绍算法的概念。冒泡排序的代码如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 -------------- 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 ---------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- 如果能在内部循环第一次运行时,使用一个旗标来表示有无需要交换的可能,可以把最优时间复杂度降低到O(n)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ O(1)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ------------ 稳定</span>
+
+<span style="color: #0000ff;">void</span> Swap(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> i, <span style="color: #0000ff;">int</span><span style="color: #000000;"> j)
+{
+    </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> A[i];
+    A[i] </span>=<span style="color: #000000;"> A[j];
+    A[j] </span>=<span style="color: #000000;"> temp;
+}
+
+</span><span style="color: #0000ff;">void</span> BubbleSort(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = <span style="color: #800080;">0</span>; j &lt; n - <span style="color: #800080;">1</span>; j++)         <span style="color: #008000;">//</span><span style="color: #008000;"> 每次最大元素就像气泡一样"浮"到数组的最后</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n - <span style="color: #800080;">1</span> - j; i++) <span style="color: #008000;">//</span><span style="color: #008000;"> 依次比较相邻的两个元素,使较大的那个向后移</span>
+<span style="color: #000000;">        {
+            </span><span style="color: #0000ff;">if</span> (A[i] &gt; A[i + <span style="color: #800080;">1</span>])            <span style="color: #008000;">//</span><span style="color: #008000;"> 如果条件改成A[i] &gt;= A[i + 1],则变为不稳定的排序算法</span>
+<span style="color: #000000;">            {
+                Swap(A, i, i </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+            }
+        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A[] = { <span style="color: #800080;">6</span>, <span style="color: #800080;">5</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">8</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">4</span> };    <span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大冒泡排序</span>
+    <span style="color: #0000ff;">int</span> n = <span style="color: #0000ff;">sizeof</span>(A) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    BubbleSort(A, n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">冒泡排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>　　上述代码对序列{ 6, 5, 3, 1, 8, 7, 2, 4 }进行冒泡排序的实现过程如下</p>
+<p>　　　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160329100443676-1647340243.gif" alt=""></p>
+<p>　　使用冒泡排序为一列数字进行排序的过程如右图所示：　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160329100034660-1420925220.gif" alt=""></p>
+<p>　　尽管冒泡排序是最容易了解和实现的排序算法之一，但它对于少数元素之外的数列排序是很没有效率的。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>　　<a name="s12"></a>冒泡排序的改进：<strong>鸡尾酒排序</strong></h2>
+<p>&nbsp;</p>
+<p><strong>　　</strong>鸡尾酒排序，也叫<strong>定向冒泡排序</strong>，是冒泡排序的一种改进。此算法与冒泡排序的不同处在于<strong>从低到高然后从高到低</strong>，而冒泡排序则仅从低到高去比较序列里的每个元素。他可以得到比冒泡排序稍微好一点的效能。</p>
+<p>　　鸡尾酒排序的代码如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 -------------- 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 ---------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- 如果序列在一开始已经大部分排序过的话,会接近O(n)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ O(1)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ------------ 稳定</span>
+
+<span style="color: #0000ff;">void</span> Swap(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> i, <span style="color: #0000ff;">int</span><span style="color: #000000;"> j)
+{
+    </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> A[i];
+    A[i] </span>=<span style="color: #000000;"> A[j];
+    A[j] </span>=<span style="color: #000000;"> temp;
+}
+
+</span><span style="color: #0000ff;">void</span> CocktailSort(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">int</span> left = <span style="color: #800080;">0</span>;                            <span style="color: #008000;">//</span><span style="color: #008000;"> 初始化边界</span>
+    <span style="color: #0000ff;">int</span> right = n - <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (left &lt;<span style="color: #000000;"> right)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = left; i &lt; right; i++)   <span style="color: #008000;">//</span><span style="color: #008000;"> 前半轮,将最大元素放到后面</span>
+<span style="color: #000000;">        {
+            </span><span style="color: #0000ff;">if</span> (A[i] &gt; A[i + <span style="color: #800080;">1</span><span style="color: #000000;">])
+            {
+                Swap(A, i, i </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">);
+            }
+        }
+        right</span>--<span style="color: #000000;">;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = right; i &gt; left; i--)   <span style="color: #008000;">//</span><span style="color: #008000;"> 后半轮,将最小元素放到前面</span>
+<span style="color: #000000;">        {
+            </span><span style="color: #0000ff;">if</span> (A[i - <span style="color: #800080;">1</span>] &gt;<span style="color: #000000;"> A[i])
+            {
+                Swap(A, i </span>- <span style="color: #800080;">1</span><span style="color: #000000;">, i);
+            }
+        }
+        left</span>++<span style="color: #000000;">;
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A[] = { <span style="color: #800080;">6</span>, <span style="color: #800080;">5</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">8</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">4</span> };   <span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大定向冒泡排序</span>
+    <span style="color: #0000ff;">int</span> n = <span style="color: #0000ff;">sizeof</span>(A) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    CocktailSort(A, n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">鸡尾酒排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>　　使用鸡尾酒排序为一列数字进行排序的过程如右图所示：　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160328160227004-680964122.gif" alt=""></p>
+<p>　　以序列(2,3,4,5,1)为例，鸡尾酒排序只需要访问一次序列就可以完成排序，但如果使用冒泡排序则需要四次。但是在乱数序列的状态下，鸡尾酒排序与冒泡排序的效率都很差劲。</p>
+<p>　　</p>
+<p><span style="line-height: 1.5;"><strong>　　</strong></span></p>
+<h2><span style="line-height: 1.5;"><strong>　　<a name="s2"></a>选择排序(Selection Sort)</strong></span></h2>
+<p>&nbsp;</p>
+<p><span style="line-height: 1.5;">　　选择排序也是一种简单直观的排序算法。它的工作原理很容易理解：初始时在序列中找到最小（大）元素，放到序列的起始位置作为已排序序列；然后，再从剩余未排序元素中继续寻找最小（大）元素，放到已排序序列的末尾。以此类推，直到所有元素均排序完毕。</span></p>
+<p><span style="line-height: 1.5;">　　注意选择排序与冒泡排序的区别：冒泡排序通过依次交换相邻两个顺序不合法的元素位置，从而将当前最小（大）元素放到合适的位置；而选择排序每遍历一次都记住了当前最小（大）元素的位置，最后仅需一次交换操作即可将其放到合适的位置。</span></p>
+<p><span style="line-height: 1.5;">　　选择排序的</span><span style="line-height: 1.5;">代码如下：</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 -------------- 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 ---------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ O(1)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ------------ 不稳定</span>
+
+<span style="color: #0000ff;">void</span> Swap(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> i, <span style="color: #0000ff;">int</span><span style="color: #000000;"> j)
+{
+    </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> A[i];
+    A[i] </span>=<span style="color: #000000;"> A[j];
+    A[j] </span>=<span style="color: #000000;"> temp;
+}
+
+</span><span style="color: #0000ff;">void</span> SelectionSort(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n - <span style="color: #800080;">1</span>; i++)         <span style="color: #008000;">//</span><span style="color: #008000;"> i为已排序序列的末尾</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">int</span> min =<span style="color: #000000;"> i;
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = i + <span style="color: #800080;">1</span>; j &lt; n; j++)     <span style="color: #008000;">//</span><span style="color: #008000;"> 未排序序列</span>
+<span style="color: #000000;">        {
+            </span><span style="color: #0000ff;">if</span> (A[j] &lt; A[min])              <span style="color: #008000;">//</span><span style="color: #008000;"> 找出未排序序列中的最小值</span>
+<span style="color: #000000;">            {
+                min </span>=<span style="color: #000000;"> j;
+            }
+        }
+        </span><span style="color: #0000ff;">if</span> (min !=<span style="color: #000000;"> i)
+        {
+            Swap(A, min, i);    </span><span style="color: #008000;">//</span><span style="color: #008000;"> 放到已排序序列的末尾，该操作很有可能把稳定性打乱，所以选择排序是不稳定的排序算法</span>
+<span style="color: #000000;">        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A[] = { <span style="color: #800080;">8</span>, <span style="color: #800080;">5</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">6</span>, <span style="color: #800080;">9</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">4</span>, <span style="color: #800080;">0</span>, <span style="color: #800080;">7</span> }; <span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大选择排序</span>
+    <span style="color: #0000ff;">int</span> n = <span style="color: #0000ff;">sizeof</span>(A) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    SelectionSort(A, n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">选择排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>&nbsp;　　上述代码对序列{ 8, 5, 2, 6, 9, 3, 1, 4, 0, 7 }进行选择排序的实现过程如右图　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160329102006082-273282321.gif" alt=""></p>
+<p>&nbsp;</p>
+<p>　　使用选择排序为一列数字进行排序的宏观过程：　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160328195305723-701227998.gif" alt=""></p>
+<p>　　<strong>选择排序是不稳定的排序算法，不稳定发生在最小元素与A[i]交换的时刻。</strong></p>
+<p><strong>　　</strong>比如序列：{ <span style="color: #0000ff;">5</span>, 8, <span style="color: #0000ff;">5</span>, <span style="color: #ff0000;">2</span>, 9 }，一次选择的最小元素是2，然后把2和第一个5进行交换，从而改变了两个元素5的相对次序。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>　　<a name="s3"></a>插入排序(Insertion Sort)</h2>
+<p>&nbsp;</p>
+<p>　　插入排序是一种简单直观的排序算法。它的工作原理非常类似于我们抓扑克牌</p>
+<p>　　　　　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160329094816957-1860272498.jpg" alt=""></p>
+<p>&nbsp;</p>
+<p>　　对于未排序数据(右手抓到的牌)，在已排序序列(左手已经排好序的手牌)中从后向前扫描，找到相应位置并插入。</p>
+<p>　　插入排序在实现上，通常采用in-place排序（即只需用到O(1)的额外空间的排序），因而在从后向前扫描过程中，需要反复把已排序元素逐步向后挪位，为最新元素提供插入空间。</p>
+<p>　　具体算法描述如下：</p>
+<ol>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">从第一个元素开始，该元素可以认为已经被排序</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">取出下一个元素，在已经排序的元素序列中从后向前扫描</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">如果该元素（已排序）大于新元素，将该元素移到下一位置</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">重复步骤3，直到找到已排序的元素小于或者等于新元素的位置</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">将新元素插入到该位置后</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">重复步骤2~5</span></li>
+</ol>
+<p>　　插入排序的代码如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 ------------- 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 ---------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- 最坏情况为输入序列是降序排列的,此时时间复杂度O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- 最好情况为输入序列是升序排列的,此时时间复杂度O(n)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ O(1)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ------------ 稳定</span>
+
+<span style="color: #0000ff;">void</span> InsertionSort(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; n; i++)         <span style="color: #008000;">//</span><span style="color: #008000;"> 类似抓扑克牌排序</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">int</span> <span style="color: #0000ff;">get</span> = A[i];                 <span style="color: #008000;">//</span><span style="color: #008000;"> 右手抓到一张扑克牌</span>
+        <span style="color: #0000ff;">int</span> j = i - <span style="color: #800080;">1</span>;                  <span style="color: #008000;">//</span><span style="color: #008000;"> 拿在左手上的牌总是排序好的</span>
+        <span style="color: #0000ff;">while</span> (j &gt;= <span style="color: #800080;">0</span> &amp;&amp; A[j] &gt; <span style="color: #0000ff;">get</span>)    <span style="color: #008000;">//</span><span style="color: #008000;"> 将抓到的牌与手牌从右向左进行比较</span>
+<span style="color: #000000;">        {
+            A[j </span>+ <span style="color: #800080;">1</span>] = A[j];            <span style="color: #008000;">//</span><span style="color: #008000;"> 如果该手牌比抓到的牌大，就将其右移</span>
+            j--<span style="color: #000000;">;
+        }
+        A[j </span>+ <span style="color: #800080;">1</span>] = <span style="color: #0000ff;">get</span>; <span style="color: #008000;">//</span><span style="color: #008000;"> 直到该手牌比抓到的牌小(或二者相等)，将抓到的牌插入到该手牌右边(相等元素的相对次序未变，所以插入排序是稳定的)</span>
+<span style="color: #000000;">    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A[] = { <span style="color: #800080;">6</span>, <span style="color: #800080;">5</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">8</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">4</span> };<span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大插入排序</span>
+    <span style="color: #0000ff;">int</span> n = <span style="color: #0000ff;">sizeof</span>(A) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    InsertionSort(A, n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">插入排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>&nbsp;　　上述代码对序列{ 6, 5, 3, 1, 8, 7, 2, 4 }进行插入排序的实现过程如下</p>
+<p>　　　　　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160329095145504-1018443290.gif" alt=""></p>
+<p>　　　　　　</p>
+<p>　　使用插入排序为一列数字进行排序的宏观过程：　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160328201132394-577931661.gif" alt=""></p>
+<p>　　插入排序不适合对于数据量比较大的排序应用。但是，如果需要排序的数据量很小，比如量级小于千，那么插入排序还是一个不错的选择。 插入排序在工业级库中也有着广泛的应用，在STL的sort算法和stdlib的qsort算法中，都将插入排序作为快速排序的补充，用于少量元素的排序（通常为8个或以下）。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>　　<a name="s31"></a>插入排序的改进：二分插入排序</h2>
+<p>&nbsp;</p>
+<p>　　对于插入排序，如果比较操作的代价比交换操作大的话，可以采用<strong>二分查找法</strong>来减少比较操作的次数，我们称为<strong>二分插入排序</strong>，代码如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 -------------- 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 ---------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ O(1)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ------------ 稳定</span>
+
+<span style="color: #0000ff;">void</span> InsertionSortDichotomy(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">int</span> <span style="color: #0000ff;">get</span> = A[i];                    <span style="color: #008000;">//</span><span style="color: #008000;"> 右手抓到一张扑克牌</span>
+        <span style="color: #0000ff;">int</span> left = <span style="color: #800080;">0</span>;                    <span style="color: #008000;">//</span><span style="color: #008000;"> 拿在左手上的牌总是排序好的，所以可以用二分法</span>
+        <span style="color: #0000ff;">int</span> right = i - <span style="color: #800080;">1</span>;                <span style="color: #008000;">//</span><span style="color: #008000;"> 手牌左右边界进行初始化</span>
+        <span style="color: #0000ff;">while</span> (left &lt;= right)            <span style="color: #008000;">//</span><span style="color: #008000;"> 采用二分法定位新牌的位置</span>
+<span style="color: #000000;">        {
+            </span><span style="color: #0000ff;">int</span> mid = (left + right) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">if</span> (A[mid] &gt; <span style="color: #0000ff;">get</span><span style="color: #000000;">)
+                right </span>= mid - <span style="color: #800080;">1</span><span style="color: #000000;">;
+            </span><span style="color: #0000ff;">else</span><span style="color: #000000;">
+                left </span>= mid + <span style="color: #800080;">1</span><span style="color: #000000;">;
+        }
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> j = i - <span style="color: #800080;">1</span>; j &gt;= left; j--)    <span style="color: #008000;">//</span><span style="color: #008000;"> 将欲插入新牌位置右边的牌整体向右移动一个单位</span>
+<span style="color: #000000;">        {
+            A[j </span>+ <span style="color: #800080;">1</span>] =<span style="color: #000000;"> A[j];
+        }
+        A[left] </span>= <span style="color: #0000ff;">get</span>;                    <span style="color: #008000;">//</span><span style="color: #008000;"> 将抓到的牌插入手牌</span>
+<span style="color: #000000;">    }
+}
+
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A[] = { <span style="color: #800080;">5</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">9</span>, <span style="color: #800080;">4</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">6</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">8</span> };<span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大二分插入排序</span>
+    <span style="color: #0000ff;">int</span> n = <span style="color: #0000ff;">sizeof</span>(A) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    InsertionSortDichotomy(A, n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">二分插入排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>　　当n较大时，二分插入排序的比较次数比直接插入排序的最差情况好得多，但比直接插入排序的最好情况要差，所当以元素初始序列已经接近升序时，直接插入排序比二分插入排序比较次数少。二分插入排序元素移动次数与直接插入排序相同，依赖于元素初始序列。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>　　<a name="s32"></a>插入排序的更高效改进：希尔排序(Shell Sort)</h2>
+<p>&nbsp;</p>
+<p>　　希尔排序，也叫<strong>递减增量排序</strong>，是插入排序的一种更高效的改进版本。希尔排序是<strong>不稳定</strong>的排序算法。</p>
+<p>　　希尔排序是基于插入排序的以下两点性质而提出改进方法的：</p>
+<ul>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">插入排序在对几乎已经排好序的数据操作时，效率高，即可以达到线性排序的效率</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">但插入排序一般来说是低效的，因为插入排序每次只能将数据移动一位</span></li>
+</ul>
+<p>　　希尔排序通过将比较的全部元素分为几个区域来提升插入排序的性能。这样可以让一个元素可以一次性地朝最终位置前进一大步。然后算法再取越来越小的步长进行排序，算法的最后一步就是普通的插入排序，但是到了这步，需排序的数据几乎是已排好的了（此时插入排序较快）。<br>　　假设有一个很小的数据在一个已按升序排好序的数组的末端。如果用复杂度为O(n^2)的排序（冒泡排序或直接插入排序），可能会进行n次的比较和交换才能将该数据移至正确位置。而希尔排序会用较大的步长移动数据，所以小数据只需进行少数比较和交换即可到正确位置。</p>
+<p>　　希尔排序的代码如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;  
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 -------------- 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 ---------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- 根据步长序列的不同而不同。已知最好的为O(n(logn)^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- O(n)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- 根据步长序列的不同而不同。
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ O(1)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ------------ 不稳定</span>
+
+<span style="color: #0000ff;">void</span> ShellSort(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">int</span> h = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">while</span> (h &lt;= n)                          <span style="color: #008000;">//</span><span style="color: #008000;"> 生成初始增量</span>
+<span style="color: #000000;">    {
+        h </span>= <span style="color: #800080;">3</span> * h + <span style="color: #800080;">1</span><span style="color: #000000;">;
+    }
+    </span><span style="color: #0000ff;">while</span> (h &gt;= <span style="color: #800080;">1</span><span style="color: #000000;">)
+    {
+        </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = h; i &lt; n; i++<span style="color: #000000;">)
+        {
+            </span><span style="color: #0000ff;">int</span> j = i -<span style="color: #000000;"> h;
+            </span><span style="color: #0000ff;">int</span> <span style="color: #0000ff;">get</span> =<span style="color: #000000;"> A[i];
+            </span><span style="color: #0000ff;">while</span> (j &gt;= <span style="color: #800080;">0</span> &amp;&amp; A[j] &gt; <span style="color: #0000ff;">get</span><span style="color: #000000;">)
+            {
+                A[j </span>+ h] =<span style="color: #000000;"> A[j];
+                j </span>= j -<span style="color: #000000;"> h;
+            }
+            A[j </span>+ h] = <span style="color: #0000ff;">get</span><span style="color: #000000;">;
+        }
+        h </span>= (h - <span style="color: #800080;">1</span>) / <span style="color: #800080;">3</span>;                    <span style="color: #008000;">//</span><span style="color: #008000;"> 递减增量</span>
+<span style="color: #000000;">    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A[] = { <span style="color: #800080;">5</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">9</span>, <span style="color: #800080;">4</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">6</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">8</span> };<span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大希尔排序</span>
+    <span style="color: #0000ff;">int</span> n = <span style="color: #0000ff;">sizeof</span>(A) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    ShellSort(A, n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">希尔排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>　　以23, 10, 4, 1的步长序列进行希尔排序：　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160328205313363-2043878119.gif" alt=""></p>
+<p>　　<strong>希尔排序是不稳定的排序算法，</strong>虽然一次插入排序是稳定的，不会改变相同元素的相对顺序，但在不同的插入排序过程中，相同的元素可能在各自的插入排序中移动，最后其稳定性就会被打乱。</p>
+<p><strong>　　</strong>比如序列：{&nbsp;3, 5,&nbsp;10,&nbsp;<span style="color: #ff0000;">8</span>, 7, 2, <span style="color: #0000ff;">8</span>, 1, 20, 6 }，h=2时分成两个子序列&nbsp;{&nbsp;3, 10, 7, <span style="color: #0000ff;">8</span>, 20 } 和&nbsp;&nbsp;{&nbsp;5, <span style="color: #ff0000;">8</span>, 2, 1, 6 } ，未排序之前第二个子序列中的8在前面，现在对两个子序列进行插入排序，得到&nbsp;{&nbsp;3,&nbsp;<span style="line-height: 1.5;">7</span><span style="line-height: 1.5;">,&nbsp;</span><span style="color: #0000ff; line-height: 1.5;">8</span><span style="line-height: 1.5;">,&nbsp;</span><span style="line-height: 1.5;">10</span><span style="line-height: 1.5;">, 20 } 和 {&nbsp;</span><span style="line-height: 1.5;">1</span><span style="line-height: 1.5;">,&nbsp;</span><span style="line-height: 1.5;">2</span><span style="line-height: 1.5;">,&nbsp;</span><span style="line-height: 1.5;">5</span><span style="line-height: 1.5;">,&nbsp;</span><span style="line-height: 1.5;">6</span><span style="line-height: 1.5;">,&nbsp;</span><span style="color: #ff0000; line-height: 1.5;">8</span><span style="line-height: 1.5;">&nbsp;} ，即&nbsp;{&nbsp;3, 1,&nbsp;7,&nbsp;2, <span style="color: #0000ff;">8</span>, 5,&nbsp;10, 6, 20, <span style="color: #ff0000;">8</span> } ，两个8的相对次序发生了改变。</span></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>　　<a name="s4"></a>归并排序(Merge Sort)</h2>
+<p>&nbsp;</p>
+<p>　　归并排序是创建在归并操作上的一种有效的排序算法，效率为O(nlogn)，1945年由冯·诺伊曼首次提出。</p>
+<p>　　归并排序的实现分为<strong>递归实现</strong>与<strong>非递归(迭代)实现</strong>。递归实现的归并排序是算法设计中分治策略的典型应用，我们将一个大问题分割成小问题分别解决，然后用所有小问题的答案来解决整个大问题。非递归(迭代)实现的归并排序首先进行是两两归并，然后四四归并，然后是八八归并，一直下去直到归并了整个数组。</p>
+<p>　　归并排序算法主要依赖归并(Merge)操作。归并操作指的是将两个已经排序的序列合并成一个序列的操作，<strong>归并操作</strong>步骤如下：</p>
+<ol>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;"><strong>申请空间</strong>，使其大小为两个已经排序序列之和，该空间用来存放合并后的序列</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">设定两个指针，最初位置分别为两个已经排序序列的起始位置</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">比较两个指针所指向的元素，选择相对小的元素放入到合并空间，并移动指针到下一位置</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">重复步骤3直到某一指针到达序列尾</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">将另一序列剩下的所有元素直接复制到合并序列尾</span></li>
+</ol>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">　　归并排序的代码如下：</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;<span style="color: #000000;">
+#include </span>&lt;limits.h&gt;
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 -------------- 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 ---------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ O(n)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ------------ 稳定</span>
+
+
+<span style="color: #0000ff;">void</span> Merge(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> left, <span style="color: #0000ff;">int</span> mid, <span style="color: #0000ff;">int</span> right)<span style="color: #008000;">//</span><span style="color: #008000;"> 合并两个已排好序的数组A[left...mid]和A[mid+1...right]</span>
+<span style="color: #000000;">{
+    </span><span style="color: #0000ff;">int</span> len = right - left + <span style="color: #800080;">1</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> *temp = <span style="color: #0000ff;">new</span> <span style="color: #0000ff;">int</span>[len];       <span style="color: #008000;">//</span><span style="color: #008000;"> 辅助空间O(n)</span>
+    <span style="color: #0000ff;">int</span> index = <span style="color: #800080;">0</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> i = left;                   <span style="color: #008000;">//</span><span style="color: #008000;"> 前一数组的起始元素</span>
+    <span style="color: #0000ff;">int</span> j = mid + <span style="color: #800080;">1</span>;                <span style="color: #008000;">//</span><span style="color: #008000;"> 后一数组的起始元素</span>
+    <span style="color: #0000ff;">while</span> (i &lt;= mid &amp;&amp; j &lt;=<span style="color: #000000;"> right)
+    {
+        temp[index</span>++] = A[i] &lt;= A[j] ? A[i++] : A[j++];  <span style="color: #008000;">//</span><span style="color: #008000;"> 带等号保证归并排序的稳定性</span>
+<span style="color: #000000;">    }
+    </span><span style="color: #0000ff;">while</span> (i &lt;=<span style="color: #000000;"> mid)
+    {
+        temp[index</span>++] = A[i++<span style="color: #000000;">];
+    }
+    </span><span style="color: #0000ff;">while</span> (j &lt;=<span style="color: #000000;"> right)
+    {
+        temp[index</span>++] = A[j++<span style="color: #000000;">];
+    }
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> k = <span style="color: #800080;">0</span>; k &lt; len; k++<span style="color: #000000;">)
+    {
+        A[left</span>++] =<span style="color: #000000;"> temp[k];
+    }
+}
+
+</span><span style="color: #0000ff;">void</span> MergeSortRecursion(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> left, <span style="color: #0000ff;">int</span> right)    <span style="color: #008000;">//</span><span style="color: #008000;"> 递归实现的归并排序(自顶向下)</span>
+<span style="color: #000000;">{
+    </span><span style="color: #0000ff;">if</span> (left == right)    <span style="color: #008000;">//</span><span style="color: #008000;"> 当待排序的序列长度为1时，递归开始回溯，进行merge操作</span>
+        <span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> mid = (left + right) / <span style="color: #800080;">2</span><span style="color: #000000;">;
+    MergeSortRecursion(A, left, mid);
+    MergeSortRecursion(A, mid </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">, right);
+    Merge(A, left, mid, right);
+}
+
+</span><span style="color: #0000ff;">void</span> MergeSortIteration(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> len)    <span style="color: #008000;">//</span><span style="color: #008000;"> 非递归(迭代)实现的归并排序(自底向上)</span>
+<span style="color: #000000;">{
+    </span><span style="color: #0000ff;">int</span> left, mid, right;<span style="color: #008000;">//</span><span style="color: #008000;"> 子数组索引,前一个为A[left...mid]，后一个子数组为A[mid+1...right]</span>
+    <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">1</span>; i &lt; len; i *= <span style="color: #800080;">2</span>)        <span style="color: #008000;">//</span><span style="color: #008000;"> 子数组的大小i初始为1，每轮翻倍</span>
+<span style="color: #000000;">    {
+        left </span>= <span style="color: #800080;">0</span><span style="color: #000000;">;
+        </span><span style="color: #0000ff;">while</span> (left + i &lt; len)              <span style="color: #008000;">//</span><span style="color: #008000;"> 后一个子数组存在(需要归并)</span>
+<span style="color: #000000;">        {
+            mid </span>= left + i - <span style="color: #800080;">1</span><span style="color: #000000;">;
+            right </span>= mid + i &lt; len ? mid + i : len - <span style="color: #800080;">1</span>;<span style="color: #008000;">//</span><span style="color: #008000;"> 后一个子数组大小可能不够</span>
+<span style="color: #000000;">            Merge(A, left, mid, right);
+            left </span>= right + <span style="color: #800080;">1</span>;               <span style="color: #008000;">//</span><span style="color: #008000;"> 前一个子数组索引向后移动</span>
+<span style="color: #000000;">        }
+    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A1[] = { <span style="color: #800080;">6</span>, <span style="color: #800080;">5</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">8</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">4</span> };      <span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大归并排序</span>
+    <span style="color: #0000ff;">int</span> A2[] = { <span style="color: #800080;">6</span>, <span style="color: #800080;">5</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">8</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">4</span><span style="color: #000000;"> };
+    </span><span style="color: #0000ff;">int</span> n1 = <span style="color: #0000ff;">sizeof</span>(A1) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">int</span> n2 = <span style="color: #0000ff;">sizeof</span>(A2) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    MergeSortRecursion(A1, </span><span style="color: #800080;">0</span>, n1 - <span style="color: #800080;">1</span>);          <span style="color: #008000;">//</span><span style="color: #008000;"> 递归实现</span>
+    MergeSortIteration(A2, n2);                 <span style="color: #008000;">//</span><span style="color: #008000;"> 非递归实现</span>
+    printf(<span style="color: #800000;">"</span><span style="color: #800000;">递归实现的归并排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n1; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A1[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">非递归实现的归并排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n2; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A2[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>　　上述代码对序列{ 6, 5, 3, 1, 8, 7, 2, 4 }进行归并排序的实例如下　</p>
+<p>&nbsp;</p>
+<p>　　　　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160328211743473-909317024.gif" alt=""></p>
+<p>　　使用归并排序为一列数字进行排序的宏观过程：　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160328211504519-1388466622.gif" alt="">　　</p>
+<p>　　归并排序除了可以对数组进行排序，还可以高效的求出数组小和（即单调和）以及数组中的逆序对，详见这篇<a title="wang7010957" href="http://www.jianshu.com/p/3ab5033074f1" target="_blank">博文</a>。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>　　<a name="s5"></a>堆排序(Heap Sort)</h2>
+<p>　　</p>
+<p>　　堆排序是指利用堆这种数据结构所设计的一种选择排序算法。堆是一种近似完全二叉树的结构（通常堆是通过一维数组来实现的），并满足性质：以最大堆（也叫大根堆、大顶堆）为例，其中父结点的值总是大于它的孩子节点。</p>
+<p>　　我们可以很容易的定义堆排序的过程：</p>
+<ol>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">由输入的无序数组构造一个最大堆，作为初始的无序区</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">把堆顶元素（最大值）和堆尾元素互换</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">把堆（无序区）的尺寸缩小1，并调用heapify(A, 0)从新的堆顶元素开始进行堆调整</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">重复步骤2，直到堆的尺寸为1</span></li>
+</ol>
+<p>　　堆排序的代码如下：</p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 -------------- 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 ---------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ O(1)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ------------ 不稳定</span>
+
+
+<span style="color: #0000ff;">void</span> Swap(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> i, <span style="color: #0000ff;">int</span><span style="color: #000000;"> j)
+{
+    </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> A[i];
+    A[i] </span>=<span style="color: #000000;"> A[j];
+    A[j] </span>=<span style="color: #000000;"> temp;
+}
+
+</span><span style="color: #0000ff;">void</span> Heapify(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> i, <span style="color: #0000ff;">int</span> size)  <span style="color: #008000;">//</span><span style="color: #008000;"> 从A[i]向下进行堆调整</span>
+<span style="color: #000000;">{
+    </span><span style="color: #0000ff;">int</span> left_child = <span style="color: #800080;">2</span> * i + <span style="color: #800080;">1</span>;         <span style="color: #008000;">//</span><span style="color: #008000;"> 左孩子索引</span>
+    <span style="color: #0000ff;">int</span> right_child = <span style="color: #800080;">2</span> * i + <span style="color: #800080;">2</span>;        <span style="color: #008000;">//</span><span style="color: #008000;"> 右孩子索引</span>
+    <span style="color: #0000ff;">int</span> max = i;                        <span style="color: #008000;">//</span><span style="color: #008000;"> 选出当前结点与其左右孩子三者之中的最大值</span>
+    <span style="color: #0000ff;">if</span> (left_child &lt; size &amp;&amp; A[left_child] &gt;<span style="color: #000000;"> A[max])
+        max </span>=<span style="color: #000000;"> left_child;
+    </span><span style="color: #0000ff;">if</span> (right_child &lt; size &amp;&amp; A[right_child] &gt;<span style="color: #000000;"> A[max])
+        max </span>=<span style="color: #000000;"> right_child;
+    </span><span style="color: #0000ff;">if</span> (max !=<span style="color: #000000;"> i)
+    {
+        Swap(A, i, max);                </span><span style="color: #008000;">//</span><span style="color: #008000;"> 把当前结点和它的最大(直接)子节点进行交换</span>
+        Heapify(A, max, size);          <span style="color: #008000;">//</span><span style="color: #008000;"> 递归调用，继续从当前结点向下进行堆调整</span>
+<span style="color: #000000;">    }
+}
+
+</span><span style="color: #0000ff;">int</span> BuildHeap(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> n)           <span style="color: #008000;">//</span><span style="color: #008000;"> 建堆，时间复杂度O(n)</span>
+<span style="color: #000000;">{
+    </span><span style="color: #0000ff;">int</span> heap_size =<span style="color: #000000;"> n;
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = heap_size / <span style="color: #800080;">2</span> - <span style="color: #800080;">1</span>; i &gt;= <span style="color: #800080;">0</span>; i--) <span style="color: #008000;">//</span><span style="color: #008000;"> 从每一个非叶结点开始向下进行堆调整</span>
+<span style="color: #000000;">        Heapify(A, i, heap_size);
+    </span><span style="color: #0000ff;">return</span><span style="color: #000000;"> heap_size;
+}
+
+</span><span style="color: #0000ff;">void</span> HeapSort(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span><span style="color: #000000;"> n)
+{
+    </span><span style="color: #0000ff;">int</span> heap_size = BuildHeap(A, n);    <span style="color: #008000;">//</span><span style="color: #008000;"> 建立一个最大堆</span>
+    <span style="color: #0000ff;">while</span> (heap_size &gt; <span style="color: #800080;">1</span>)    　　　　　　 <span style="color: #008000;">//</span><span style="color: #008000;"> 堆（无序区）元素个数大于1，未完成排序</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 将堆顶元素与堆的最后一个元素互换，并从堆中去掉最后一个元素
+        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 此处交换操作很有可能把后面元素的稳定性打乱，所以堆排序是不稳定的排序算法</span>
+        Swap(A, <span style="color: #800080;">0</span>, --<span style="color: #000000;">heap_size);
+        Heapify(A, </span><span style="color: #800080;">0</span>, heap_size);     <span style="color: #008000;">//</span><span style="color: #008000;"> 从新的堆顶元素开始向下进行堆调整，时间复杂度O(logn)</span>
+<span style="color: #000000;">    }
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A[] = { <span style="color: #800080;">5</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">9</span>, <span style="color: #800080;">4</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">6</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">8</span> };<span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大堆排序</span>
+    <span style="color: #0000ff;">int</span> n = <span style="color: #0000ff;">sizeof</span>(A) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    HeapSort(A, n);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">堆排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>　　堆排序算法的演示：　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160328213839160-2037856208.gif" alt=""></p>
+<p>　　动画中在排序过程之前简单的表现了创建堆的过程以及堆的逻辑结构。</p>
+<p><strong>　　堆排序是不稳定的排序算法，不稳定发生在堆顶元素与A[i]交换的时刻。</strong></p>
+<p><strong>　　</strong>比如序列：{ <span style="color: #000000;">9</span>, <span style="color: #ff0000;">5</span>, 7,&nbsp;<span style="color: #0000ff;">5</span> }，堆顶元素是9，堆排序下一步将9和第二个5进行交换，得到序列&nbsp;{&nbsp;<span style="color: #0000ff;">5</span>, <span style="color: #ff0000;">5</span>, 7,&nbsp;9&nbsp;}，再进行堆调整得到{&nbsp;7, <span style="color: #ff0000;">5</span>,&nbsp;<span style="color: #0000ff;">5</span>,&nbsp;9&nbsp;}，重复之前的操作最后得到{ <span style="color: #0000ff;">5</span>,&nbsp;<span style="color: #ff0000;">5</span>, 7,&nbsp;9&nbsp;}从而改变了两个5的相对次序。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>　　<a name="s6"></a>快速排序(Quick Sort)</h2>
+<p>&nbsp;</p>
+<p>　　快速排序是由东尼·霍尔所发展的一种排序算法。在平均状况下，排序n个元素要O(nlogn)次比较。在最坏状况下则需要O(n^2)次比较，但这种状况并不常见。事实上，快速排序通常明显比其他O(nlogn)算法更快，因为它的内部循环可以在大部分的架构上很有效率地被实现出来。</p>
+<p>　　快速排序使用分治策略(Divide and Conquer)来把一个序列分为两个子序列。步骤为：</p>
+<ol>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">从序列中挑出一个元素，作为"基准"(pivot).</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">把所有比基准值小的元素放在基准前面，所有比基准值大的元素放在基准的后面（相同的数可以到任一边），这个称为分区(partition)操作。</span></li>
+<li><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">对每个分区递归地进行步骤1~2，递归的结束条件是序列的大小是0或1，这时整体已经被排好序了。</span></li>
+</ol>
+<p><span style="font-family: &#39;Microsoft YaHei&#39;; font-size: 15px;">　　快速排序的代码如下：</span></p>
+<div class="cnblogs_code"><div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div>
+<pre>#include &lt;stdio.h&gt;
+
+<span style="color: #008000;">//</span><span style="color: #008000;"> 分类 ------------ 内部比较排序
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 数据结构 --------- 数组
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最差时间复杂度 ---- 每次选取的基准都是最大（或最小）的元素，导致每次只划分出了一个分区，需要进行n-1次划分才能结束递归，时间复杂度为O(n^2)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 最优时间复杂度 ---- 每次选取的基准都是中位数，这样每次都均匀的划分出两个分区，只需要logn次划分就能结束递归，时间复杂度为O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 平均时间复杂度 ---- O(nlogn)
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 所需辅助空间 ------ 主要是递归造成的栈空间的使用(用来保存left和right等局部变量)，取决于递归树的深度，一般为O(logn)，最差为O(n)       
+</span><span style="color: #008000;">//</span><span style="color: #008000;"> 稳定性 ---------- 不稳定</span>
+
+<span style="color: #0000ff;">void</span> Swap(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> i, <span style="color: #0000ff;">int</span><span style="color: #000000;"> j)
+{
+    </span><span style="color: #0000ff;">int</span> temp =<span style="color: #000000;"> A[i];
+    A[i] </span>=<span style="color: #000000;"> A[j];
+    A[j] </span>=<span style="color: #000000;"> temp;
+}
+
+</span><span style="color: #0000ff;">int</span> Partition(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> left, <span style="color: #0000ff;">int</span> right)  <span style="color: #008000;">//</span><span style="color: #008000;"> 划分函数</span>
+<span style="color: #000000;">{
+    </span><span style="color: #0000ff;">int</span> pivot = A[right];               <span style="color: #008000;">//</span><span style="color: #008000;"> 这里每次都选择最后一个元素作为基准</span>
+    <span style="color: #0000ff;">int</span> tail = left - <span style="color: #800080;">1</span>;                <span style="color: #008000;">//</span><span style="color: #008000;"> tail为小于基准的子数组最后一个元素的索引</span>
+    <span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = left; i &lt; right; i++)  <span style="color: #008000;">//</span><span style="color: #008000;"> 遍历基准以外的其他元素</span>
+<span style="color: #000000;">    {
+        </span><span style="color: #0000ff;">if</span> (A[i] &lt;= pivot)              <span style="color: #008000;">//</span><span style="color: #008000;"> 把小于等于基准的元素放到前一个子数组末尾</span>
+<span style="color: #000000;">        {
+            Swap(A, </span>++<span style="color: #000000;">tail, i);
+        }
+    }
+    Swap(A, tail </span>+ <span style="color: #800080;">1</span>, right);           <span style="color: #008000;">//</span><span style="color: #008000;"> 最后把基准放到前一个子数组的后边，剩下的子数组既是大于基准的子数组
+                                        </span><span style="color: #008000;">//</span><span style="color: #008000;"> 该操作很有可能把后面元素的稳定性打乱，所以快速排序是不稳定的排序算法</span>
+    <span style="color: #0000ff;">return</span> tail + <span style="color: #800080;">1</span>;                    <span style="color: #008000;">//</span><span style="color: #008000;"> 返回基准的索引</span>
+<span style="color: #000000;">}
+
+</span><span style="color: #0000ff;">void</span> QuickSort(<span style="color: #0000ff;">int</span> A[], <span style="color: #0000ff;">int</span> left, <span style="color: #0000ff;">int</span><span style="color: #000000;"> right)
+{
+    </span><span style="color: #0000ff;">if</span> (left &gt;=<span style="color: #000000;"> right)
+        </span><span style="color: #0000ff;">return</span><span style="color: #000000;">;
+    </span><span style="color: #0000ff;">int</span> pivot_index = Partition(A, left, right); <span style="color: #008000;">//</span><span style="color: #008000;"> 基准的索引</span>
+    QuickSort(A, left, pivot_index - <span style="color: #800080;">1</span><span style="color: #000000;">);
+    QuickSort(A, pivot_index </span>+ <span style="color: #800080;">1</span><span style="color: #000000;">, right);
+}
+
+</span><span style="color: #0000ff;">int</span><span style="color: #000000;"> main()
+{
+    </span><span style="color: #0000ff;">int</span> A[] = { <span style="color: #800080;">5</span>, <span style="color: #800080;">2</span>, <span style="color: #800080;">9</span>, <span style="color: #800080;">4</span>, <span style="color: #800080;">7</span>, <span style="color: #800080;">6</span>, <span style="color: #800080;">1</span>, <span style="color: #800080;">3</span>, <span style="color: #800080;">8</span> }; <span style="color: #008000;">//</span><span style="color: #008000;"> 从小到大快速排序</span>
+    <span style="color: #0000ff;">int</span> n = <span style="color: #0000ff;">sizeof</span>(A) / <span style="color: #0000ff;">sizeof</span>(<span style="color: #0000ff;">int</span><span style="color: #000000;">);
+    QuickSort(A, </span><span style="color: #800080;">0</span>, n - <span style="color: #800080;">1</span><span style="color: #000000;">);
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">快速排序结果：</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">for</span> (<span style="color: #0000ff;">int</span> i = <span style="color: #800080;">0</span>; i &lt; n; i++<span style="color: #000000;">)
+    {
+        printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">%d </span><span style="color: #800000;">"</span><span style="color: #000000;">, A[i]);
+    }
+    printf(</span><span style="color: #800000;">"</span><span style="color: #800000;">\n</span><span style="color: #800000;">"</span><span style="color: #000000;">);
+    </span><span style="color: #0000ff;">return</span> <span style="color: #800080;">0</span><span style="color: #000000;">;
+}</span></pre>
+<div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"><a href="javascript:void(0);" onclick="copyCnblogsCode(this)" title="复制代码"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/copycode.gif" alt="复制代码"></a></span></div></div>
+<p>&nbsp;</p>
+<p>　　使用快速排序法对一列数字进行排序的过程：　　<img src="./常用排序算法总结(一) - SteveWang - 博客园_files/739525-20160328215109269-23458370.gif" alt=""></p>
+<p>&nbsp;</p>
+<p>　　<strong>快速排序是不稳定的排序算法，不稳定发生在基准元素与A[tail+1]交换的时刻。</strong></p>
+<p><strong>　　</strong>比如序列：{ 1, 3, 4, 2, <span style="color: #0000ff;">8</span>, 9, <span style="color: #0000ff;">8</span>, 7, <span style="color: #ff0000;">5</span> }，基准元素是5，一次划分操作后5要和第一个8进行交换，从而改变了两个元素8的相对次序。</p>
+<p>&nbsp;</p>
+<blockquote>
+<p>　　Java系统提供的Arrays.sort函数。对于基础类型，底层使用快速排序。对于非基础类型，底层使用归并排序。请问是为什么？</p>
+</blockquote>
+<p>　　答：这是考虑到排序算法的稳定性。对于基础类型，相同值是无差别的，排序前后相同值的相对位置并不重要，所以选择更为高效的快速排序，尽管它是不稳定的排序算法；而对于非基础类型，排序前后相等实例的相对位置不宜改变，所以选择稳定的归并排序。&nbsp;</p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="http://www.cnblogs.com/eniac12/category/723328.html" target="_blank">算法</a></div>
+<div id="EntryTag">标签: <a href="http://www.cnblogs.com/eniac12/tag/%E7%AE%97%E6%B3%95/">算法</a>, <a href="http://www.cnblogs.com/eniac12/tag/%E6%8E%92%E5%BA%8F/">排序</a></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5329396,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;2ea8bbf9-11d9-e411-b908-9dcfd8948a71&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/eniac12/" target="_blank"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/20161018094910.png" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/eniac12/">SteveWang</a><br>
+            <a href="http://home.cnblogs.com/u/eniac12/followees">关注 - 5</a><br>
+            <a href="http://home.cnblogs.com/u/eniac12/followers">粉丝 - 111</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;2ea8bbf9-11d9-e411-b908-9dcfd8948a71&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5329396,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">51</span>
+    </div>
+    <div class="buryit" onclick="votePost(5329396,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/eniac12/p/5296139.html" class="p_n_p_prefix">« </a> 上一篇：<a href="http://www.cnblogs.com/eniac12/p/5296139.html" title="发布于2016-03-19 19:59">找出数组中出现次数最多的那个数——主元素问题</a><br><a href="http://www.cnblogs.com/eniac12/p/5332117.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/eniac12/p/5332117.html" title="发布于2016-03-29 13:07">常用排序算法总结(二)</a><br></div>
+</div>
+
+</div>
+	</div></div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<h3>Feedback</h3>
+	
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3596338" class="layer">#1楼</a><a name="3596338" id="comment_anchor_3596338"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-01-04 18:24</span> by <a id="a_comment_author_3596338" href="http://www.cnblogs.com/wcc331902579/" target="_blank">331902579</a> <a href="http://msg.cnblogs.com/send/331902579" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3596338" class="blog_comment_body">图文并茂，很容易理解！<br>快速排序中：<br>if (A[i] &lt;= pivot)<br>{<br>	tail++;<br>	exchange(A, tail, i);<br>}<br>可以修改成：<br>if (A[i] &lt;= pivot)<br>{<br>	tail++;<br>	if(tail != i)<br>	exchange(A, tail, i);<br>}<br>提高效率。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3596338,&#39;Digg&#39;,this)">支持(3)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3596338,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3648737" class="layer">#2楼</a><a name="3648737" id="comment_anchor_3648737"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-03-22 18:12</span> by <a id="a_comment_author_3648737" href="http://www.cnblogs.com/life2refuel/" target="_blank">喜欢兰花山丘</a> <a href="http://msg.cnblogs.com/send/%E5%96%9C%E6%AC%A2%E5%85%B0%E8%8A%B1%E5%B1%B1%E4%B8%98" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3648737" class="blog_comment_body">"一种是比较排序，时间复杂度最少可达到O(n log n)，主要有：冒泡排序，选择排序 "<br>这句话 怪怪的, 可以改成 时间复杂度O(nlogn) ~ O(n^2) . 哈哈</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3648737,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3648737,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3648737_avatar" style="display:none;">http://pic.cnblogs.com/face/532523/20130525211029.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3650868" class="layer">#3楼</a><a name="3650868" id="comment_anchor_3650868"></a>[<span class="louzhu">楼主</span>]
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-03-24 20:47</span> by <a id="a_comment_author_3650868" href="http://www.cnblogs.com/eniac12/" target="_blank">SteveWang</a> <a href="http://msg.cnblogs.com/send/SteveWang" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3650868" class="blog_comment_body"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#3648737" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3648737);">@</a>
+喜欢兰花山丘<br><fieldset class="comment_quote"><legend><a href="http://www.cnblogs.com/eniac12/p/5329396.html#3648737" title="查看引用原文">引用</a></legend><br>"一种是比较排序，时间复杂度最少可达到O(n log n)，主要有：冒泡排序，选择排序 "<br>这句话 怪怪的, 可以改成 时间复杂度O(nlogn) ~ O(n^2) . 哈哈<br></fieldset><br>感谢您的建议  已更正</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3650868,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3650868,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3650868_avatar" style="display:none;">http://pic.cnblogs.com/face/739525/20161018094910.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3756578" class="layer">#4楼</a><a name="3756578" id="comment_anchor_3756578"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-08-12 21:36</span> by <a id="a_comment_author_3756578" href="http://www.cnblogs.com/willowWind/" target="_blank">willowWind</a> <a href="http://msg.cnblogs.com/send/willowWind" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3756578" class="blog_comment_body">学习了！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3756578,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3756578,&#39;Bury&#39;,this)">反对(1)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3759619" class="layer">#5楼</a><a name="3759619" id="comment_anchor_3759619"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-08-16 17:15</span> by <a id="a_comment_author_3759619" href="http://www.cnblogs.com/kanglishan/" target="_blank">kanglishan</a> <a href="http://msg.cnblogs.com/send/kanglishan" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3759619" class="blog_comment_body">总结的很牛， 如果把jdk中提供的排序算法， 也解析一下， 就完美了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3759619,&#39;Digg&#39;,this)">支持(2)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3759619,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3774756" class="layer">#6楼</a><a name="3774756" id="comment_anchor_3774756"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-09-04 16:54</span> by <a id="a_comment_author_3774756" href="http://home.cnblogs.com/u/1173602/" target="_blank">炗宇</a> <a href="http://msg.cnblogs.com/send/%E7%82%97%E5%AE%87" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3774756" class="blog_comment_body">厉害，真是厉害</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3774756,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3774756,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3775704" class="layer">#7楼</a><a name="3775704" id="comment_anchor_3775704"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-09-05 16:21</span> by <a id="a_comment_author_3775704" href="http://www.cnblogs.com/andyz168/" target="_blank">lovejean</a> <a href="http://msg.cnblogs.com/send/lovejean" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3775704" class="blog_comment_body">学习</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3775704,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3775704,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3775704_avatar" style="display:none;">http://pic.cnblogs.com/face/u94181.jpg</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3799576" class="layer">#8楼</a><a name="3799576" id="comment_anchor_3799576"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-09-28 16:09</span> by <a id="a_comment_author_3799576" href="http://www.cnblogs.com/zhuixun/" target="_blank">暗影游侠</a> <a href="http://msg.cnblogs.com/send/%E6%9A%97%E5%BD%B1%E6%B8%B8%E4%BE%A0" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3799576" class="blog_comment_body"><a href="http://www.cnblogs.com/eniac12/p/5329396.html#3759619" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3759619);">@</a>
+kanglishan<br>jdk中的那个快速排序算法很复杂，没看懂</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3799576,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3799576,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3799576_avatar" style="display:none;">http://pic.cnblogs.com/face/1048444/20170523183136.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3805156" class="layer">#9楼</a><a name="3805156" id="comment_anchor_3805156"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-10-09 11:35</span> by <a id="a_comment_author_3805156" href="http://www.cnblogs.com/guxin/" target="_blank">霍莉雪特</a> <a href="http://msg.cnblogs.com/send/%E9%9C%8D%E8%8E%89%E9%9B%AA%E7%89%B9" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3805156" class="blog_comment_body">太棒了，有动图看一目了然！！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3805156,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3805156,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3805156_avatar" style="display:none;">http://pic.cnblogs.com/face/759894/20170706233845.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3815530" class="layer">#10楼</a><a name="3815530" id="comment_anchor_3815530"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-10-19 16:07</span> by <a id="a_comment_author_3815530" href="http://home.cnblogs.com/u/1177520/" target="_blank">历乱</a> <a href="http://msg.cnblogs.com/send/%E5%8E%86%E4%B9%B1" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3815530" class="blog_comment_body">谢谢博主，文章我一个小菜鸟也很容易理解！！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3815530,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3815530,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3824749" class="layer">#11楼</a><a name="3824749" id="comment_anchor_3824749"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-10-28 23:13</span> by <a id="a_comment_author_3824749" href="http://www.cnblogs.com/sunshine-anycall/" target="_blank">Mr 布鲁斯</a> <a href="http://msg.cnblogs.com/send/Mr%20%E5%B8%83%E9%B2%81%E6%96%AF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3824749" class="blog_comment_body">希尔排序的步长获取方法错了，最后得到的值大于排序数组的长度。<a href="https://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F" target="_blank">https://zh.wikipedia.org/wiki/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3824749,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3824749,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3824749_avatar" style="display:none;">http://pic.cnblogs.com/face/38290/20151104140500.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3834267" class="layer">#12楼</a><a name="3834267" id="comment_anchor_3834267"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-11-08 00:20</span> by <a id="a_comment_author_3834267" href="http://home.cnblogs.com/u/1000626/" target="_blank">罐v子</a> <a href="http://msg.cnblogs.com/send/%E7%BD%90v%E5%AD%90" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3834267" class="blog_comment_body">希尔排序代码，计算步长h的时候while（h &lt;= n）应为while（h &lt;= n / 3）。<br>虽然后续的代码中使用h时，由于有h &lt; n的判断避免了错误，但是这里多进行了一次计算操作，也是可以避免的。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3834267,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3834267,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3844481" class="layer">#13楼</a><a name="3844481" id="comment_anchor_3844481"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-11-19 10:53</span> by <a id="a_comment_author_3844481" href="http://home.cnblogs.com/u/1282569/" target="_blank">super828</a> <a href="http://msg.cnblogs.com/send/super828" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3844481" class="blog_comment_body">很好，很详细啊</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3844481,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3844481,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3853209" class="layer">#14楼</a><a name="3853209" id="comment_anchor_3853209"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-11-29 11:09</span> by <a id="a_comment_author_3853209" href="http://www.cnblogs.com/think-in-java/" target="_blank">陈其苗</a> <a href="http://msg.cnblogs.com/send/%E9%99%88%E5%85%B6%E8%8B%97" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3853209" class="blog_comment_body">mark</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3853209,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3853209,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3853209_avatar" style="display:none;">http://pic.cnblogs.com/face/656873/20170927142437.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3870570" class="layer">#15楼</a><a name="3870570" id="comment_anchor_3870570"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2017-12-20 23:01</span> by <a id="a_comment_author_3870570" href="http://www.cnblogs.com/dreamHighMjc/" target="_blank">马建超</a> <a href="http://msg.cnblogs.com/send/%E9%A9%AC%E5%BB%BA%E8%B6%85" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3870570" class="blog_comment_body">不太明白，直接插入排序中，没有这一句也可以<br><br>A[j + 1] = get; // 直到该手牌比抓到的牌小(或二者相等)，将抓到的牌插入到该手牌右边(相等元素的相对次序未变，所以插入排序是稳定的)</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3870570,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3870570,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3870570_avatar" style="display:none;">http://pic.cnblogs.com/face/1132996/20180126171436.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3886142" class="layer">#16楼</a><a name="3886142" id="comment_anchor_3886142"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2018-01-10 15:50</span> by <a id="a_comment_author_3886142" href="http://home.cnblogs.com/u/1315802/" target="_blank">如果有一天,不如好好每一天</a> <a href="http://msg.cnblogs.com/send/%E5%A6%82%E6%9E%9C%E6%9C%89%E4%B8%80%E5%A4%A9%2C%E4%B8%8D%E5%A6%82%E5%A5%BD%E5%A5%BD%E6%AF%8F%E4%B8%80%E5%A4%A9" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3886142" class="blog_comment_body">您好，对于二分查找的插入排序中，当要插入的值和中间的值相等的时候，可以直接返回，然后把left=mid;虽然二分查找一个快速的，但是一定上还是能增加一定的运算效率<br><br><br><div class="cnblogs_Highlighter sh-gutter"><div><div id="highlighter_307028" class="syntaxhighlighter  java"><div class="toolbar"><span><a href="http://www.cnblogs.com/eniac12/p/5329396.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="java keyword">while</code><code class="java plain">(left&lt;=right){&nbsp; </code><code class="java comments">//用二分查找快速锁定要查找的位置</code></div><div class="line number2 index1 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number3 index2 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">if</code><code class="java plain">(arr[mid]&gt;get){</code></div><div class="line number4 index3 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">right=mid-</code><code class="java value">1</code><code class="java plain">;</code></div><div class="line number5 index4 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">mid=(left+right)/</code><code class="java value">2</code><code class="java plain">;</code></div><div class="line number6 index5 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number7 index6 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">else</code> <code class="java keyword">if</code><code class="java plain">(arr[mid]&lt;get){</code></div><div class="line number8 index7 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">left=mid+</code><code class="java value">1</code><code class="java plain">;</code></div><div class="line number9 index8 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">mid=(left+right)/</code><code class="java value">2</code><code class="java plain">;</code></div><div class="line number10 index9 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code><code class="java keyword">else</code><code class="java plain">{</code></div><div class="line number11 index10 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">left=mid;</code></div><div class="line number12 index11 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">break</code><code class="java plain">;</code></div><div class="line number13 index12 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number14 index13 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number15 index14 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number16 index15 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>&nbsp;</div><div class="line number17 index16 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">int</code> <code class="java plain">j=i-</code><code class="java value">1</code><code class="java plain">;</code></div><div class="line number18 index17 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java keyword">while</code><code class="java plain">(j&gt;=left&amp;&amp;arr[j]&gt;get){</code></div><div class="line number19 index18 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">arr[j+</code><code class="java value">1</code><code class="java plain">]=arr[j];</code></div><div class="line number20 index19 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">j--;</code></div><div class="line number21 index20 alt2"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">}</code></div><div class="line number22 index21 alt1"><code class="java spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="java plain">arr[left]=get;</code></div></div></td></tr></tbody></table></div></div></div></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3886142,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3886142,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3893713" class="layer">#17楼</a><a name="3893713" id="comment_anchor_3893713"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2018-01-19 16:53</span> by <a id="a_comment_author_3893713" href="http://home.cnblogs.com/u/1299606/" target="_blank">python超级入门者</a> <a href="http://msg.cnblogs.com/send/python%E8%B6%85%E7%BA%A7%E5%85%A5%E9%97%A8%E8%80%85" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3893713" class="blog_comment_body">感谢分享</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3893713,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3893713,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3938131" class="layer">#18楼</a><a name="3938131" id="comment_anchor_3938131"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2018-03-30 19:30</span> by <a id="a_comment_author_3938131" href="http://www.cnblogs.com/iotzeep/" target="_blank">藏扇</a> <a href="http://msg.cnblogs.com/send/%E8%97%8F%E6%89%87" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3938131" class="blog_comment_body">谢谢博主，动图很形象。收藏了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3938131,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3938131,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3938131_avatar" style="display:none;">http://pic.cnblogs.com/face/1137771/20180330181810.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3967125" class="layer">#19楼</a><a name="3967125" id="comment_anchor_3967125"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2018-05-04 13:21</span> by <a id="a_comment_author_3967125" href="http://www.cnblogs.com/jianghuaijie/" target="_blank">jhjs</a> <a href="http://msg.cnblogs.com/send/jhjs" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3967125" class="blog_comment_body">归并排序在回溯的时候频繁开辟内存空间，且没有对申请的空间做释放处理；<br>最好在MergeSortRecursion（）函数外申请临时内存空间，用完后释放处理。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3967125,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3967125,&#39;Bury&#39;,this)">反对(0)</a></div><span id="comment_3967125_avatar" style="display:none;">http://pic.cnblogs.com/face/1138174/20171109134303.png</span></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3972917" class="layer">#20楼</a><a name="3972917" id="comment_anchor_3972917"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2018-05-12 19:14</span> by <a id="a_comment_author_3972917" href="http://home.cnblogs.com/u/1375963/" target="_blank">江小医</a> <a href="http://msg.cnblogs.com/send/%E6%B1%9F%E5%B0%8F%E5%8C%BB" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3972917" class="blog_comment_body">优秀   感谢博主！非常有用了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3972917,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3972917,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3997357" class="layer">#21楼</a><a name="3997357" id="comment_anchor_3997357"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2018-06-13 12:25</span> by <a id="a_comment_author_3997357" href="http://home.cnblogs.com/u/1364639/" target="_blank">CatPaw_NO_1</a> <a href="http://msg.cnblogs.com/send/CatPaw_NO_1" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3997357" class="blog_comment_body">优秀优秀，学习了，感谢大神！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3997357,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3997357,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#3999571" class="layer">#22楼</a><a name="3999571" id="comment_anchor_3999571"></a>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2018-06-16 13:34</span> by <a id="a_comment_author_3999571" href="http://www.cnblogs.com/jowu/" target="_blank">jowu</a> <a href="http://msg.cnblogs.com/send/jowu" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_3999571" class="blog_comment_body">请问你的动态图是怎么制作的？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3999571,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3999571,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		
+			<div class="post">
+				<div class="posthead">
+					<h2>
+						<a href="http://www.cnblogs.com/eniac12/p/5329396.html#4002322" class="layer">#23楼</a><a name="4002322" id="comment_anchor_4002322"></a><span id="comment-maxId" style="display:none;">4002322</span><span id="comment-maxDate" style="display:none;">2018/6/21 11:02:30</span>
+						&nbsp;&nbsp;<span class="comment_actions"></span>
+					</h2>
+					 <span class="comment_date">2018-06-21 11:02</span> by <a id="a_comment_author_4002322" href="http://www.cnblogs.com/kanshan2018/" target="_blank">看日升日落</a> <a href="http://msg.cnblogs.com/send/%E7%9C%8B%E6%97%A5%E5%8D%87%E6%97%A5%E8%90%BD" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+				</div>
+				<div class="postbody"><div id="comment_body_4002322" class="blog_comment_body">谢谢博主，很受用</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4002322,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4002322,&#39;Bury&#39;,this)">反对(0)</a></div></div>
+			</div>
+		<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="http://www.cnblogs.com/eniac12/p/5329396.html#" onclick="return RefreshPage();">刷新页面</a><a href="http://www.cnblogs.com/eniac12/p/5329396.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】超50万VC++源码: 大型组态工控、电力仿真CAD与GIS源码库！</a><br><a href="https://dnspod.cloud.tencent.com/act/yearendsales?from=IT&amp;fromSource=gwzcw.951778.951778.951778" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-T2-腾讯云&#39;)">【推荐】腾讯云新注册用户域名抢购1元起</a><br><a href="http://clickc.admaster.com.cn/c/a105960,b2436453,c1705,i0,m101,8a1,8b2,h" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-T2-华为云&#39;)">【活动】华为云7大明星产品0元免费使用！</a><br><a href="https://www.upyun.com/products/prismcdn?utm_source=cnblogs&amp;utm_medium=banner&amp;utm_campaign=prismcdn&amp;utm_content=0614" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-T2-upyun&#39;)">【推荐】又拍云强势推出超低价、低延时、超强兼容的 P2P-CDN！</a><br><a href="http://challenge.xfyun.cn/?ch=bk" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-xfyun&#39;)">【大赛】2018首届“顶天立地”AI开发者大赛</a><br></div>
+<div id="opt_under_post"></div>
+<div id="cnblogs_c1" class="c_ad_block"><a href="https://cloud.tencent.com/freetier?fromSource=gwzcw.1027255.1027255.1027255" target="_blank"><img width="300" height="250" src="./常用排序算法总结(一) - SteveWang - 博客园_files/24442-20180611171134854-1629599186.jpg" alt="腾讯云0611" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;C1&#39;);"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="https://news.cnblogs.com/n/600507/" target="_blank">华为云总裁疑喊话阿里云：强调自主可控别用开源代码</a><br> ·  <a href="https://news.cnblogs.com/n/600506/" target="_blank">新东方在线与腾讯云合作升级在线课堂技术</a><br> ·  <a href="https://news.cnblogs.com/n/600505/" target="_blank">超级细菌感染人之后难以被杀灭，我们如何面对？</a><br> ·  <a href="https://news.cnblogs.com/n/600502/" target="_blank">励志的冰岛队止步小组赛：点球成金的故事为何很难成为现实</a><br> ·  <a href="https://news.cnblogs.com/n/600496/" target="_blank">中兴通讯：同意向中国银行申请300亿元综合授信额度</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="cnblogs_c2" class="c_ad_block"><a href="http://click.aliyun.com/m/34770/" target="_blank"><img src="./常用排序算法总结(一) - SteveWang - 博客园_files/TB1gBPhgZLJ8KJjy0FnXXcFDpXa-468-60.jpg" alt="" style="width: 468px; height: 60px;"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/522513/" target="_blank">如何提升你的能力？给年轻程序员的几条建议</a><br> ·  <a href="http://kb.cnblogs.com/page/553361/" target="_blank">程序员的那些反模式</a><br> ·  <a href="http://kb.cnblogs.com/page/598335/" target="_blank">程序员的宇宙时间线</a><br> ·  <a href="http://kb.cnblogs.com/page/597877/" target="_blank">突破程序员思维</a><br> ·  <a href="http://kb.cnblogs.com/page/597631/" target="_blank">云、雾和霭计算如何一起工作</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" class="FooterCell">
+			
+<p id="footer">
+	Powered by: 
+	<br>
+	
+	<a id="Footer1_Hyperlink3" name="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br>
+	Copyright © SteveWang
+</p>
+
+		</td>
+	</tr>
+</tbody></table>
+
+
+
+</body></html>

@@ -1,0 +1,25 @@
+/* advertise */
+#site_nav_under,#ad_under_post_holder,#under_post_news,#google_ad_c2,#under_post_kb{
+width:0;
+height:0;
+display:none;
+overflow:hidden;
+}
+
+#cnblogs_post_body h2 {
+  font-size: 15pt;
+  font-family: Arial,"微软雅黑","宋体","黑体",sans-serif;
+  background-color: #2B6695;
+  height: 35px;
+  line-height: 35px;
+  color: #FFF;
+  padding: 0px 10px;
+  border-radius: 6px;
+  box-shadow: 3px 3px 5px #2B3E53;
+  text-shadow: 2px 2px 3px #222;
+}
+
+p {
+  font-size: 16px;
+  font-family: Arial,"微软雅黑","黑体","宋体",sans-serif;
+}
